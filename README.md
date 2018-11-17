@@ -4,3 +4,27 @@ embarassing notes
 transform.forward - to get forward from quaternion, multiply quaternion by whatever vector "forward" is in your coordinate system - most likely (0,0,1)
 
 structs values cant be assigned, whole new struct must be replaced - struct = new struct{ value = 21 };
+
+
+# ecs specific
+queries
+        private ComponentGroup group;
+            group = GetComponentGroup(typeof(Position), typeof(Rigidbody), typeof(FindTarget));
+            
+            group = new EntityArchetypeQuery
+            {
+                Any = Array.Empty<ComponentType>(),
+                None = Array.Empty<ComponentType>(),
+                All = new ComponentType[] {typeof(EcsTestData)}
+            };
+            
+            group = GetComponentGroup(new EntityArchetypeQuery()
+            {
+                All = new ComponentType[] { ComponentType.Create<Position>() },
+                Any = new ComponentType[] { ComponentType.ReadOnly<ManPowerData>(), ComponentType.ReadOnly<EngineData>() },
+                None = System.Array.Empty<ComponentType>()
+            });
+            
+            
+            NativeArray<ArchetypeChunk> chunks = group.CreateArchetypeChunkArray(Allocator.TempJob);
+            var ecsTestData = GetArchetypeChunkComponentType<FindTarget>(true);
