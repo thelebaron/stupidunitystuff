@@ -28,3 +28,18 @@ queries
             
             NativeArray<ArchetypeChunk> chunks = group.CreateArchetypeChunkArray(Allocator.TempJob);
             var ecsTestData = GetArchetypeChunkComponentType<FindTarget>(true);
+
+
+#- jobhandle in an array
+      var handleArray = new NativeArray<JobHandle>(100, Allocator.Persistent);
+ 
+      // schedule all jobs
+      for (Int32 i = 0; i < _packets.Length; ++i) {
+        Job_IJob job;
+        job.Packet = _packets[i];
+        job.Entities = entitiesArrays[i];
+        handleArray[i] = job.Schedule(handle);
+      }
+ 
+      // complete
+      JobHandle.CompleteAll(handleArray);
