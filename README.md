@@ -30,7 +30,7 @@ queries
             var ecsTestData = GetArchetypeChunkComponentType<FindTarget>(true);
 
 
-#- jobhandle in an array
+# jobhandle in an array
       var handleArray = new NativeArray<JobHandle>(100, Allocator.Persistent);
  
       // schedule all jobs
