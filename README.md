@@ -20,6 +20,9 @@ queries
             
             group = GetComponentGroup(new EntityArchetypeQuery()
             {
+                All = new ComponentType[] { typeof(Ammo) },
+                None = new ComponentType[] { typeof(AttackingTag) }
+                
                 All = new ComponentType[] { ComponentType.Create<Position>() },
                 Any = new ComponentType[] { ComponentType.ReadOnly<ManPowerData>(), ComponentType.ReadOnly<EngineData>() },
                 None = System.Array.Empty<ComponentType>()
