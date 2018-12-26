@@ -46,3 +46,11 @@ queries
  
       // complete
       JobHandle.CompleteAll(handleArray);
+
+
+
+------------------- python --------------------------
+https://www.pugetsystems.com/labs/hpc/The-Best-Way-to-Install-TensorFlow-with-GPU-Support-on-Windows-10-Without-Installing-CUDA-1187/#create-a-python-virtual-environment-for-tensorflow-using-conda
+
+python --version
+conda install python=3.6
