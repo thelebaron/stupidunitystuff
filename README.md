@@ -35,6 +35,61 @@ queries
             var ecsTestData = GetArchetypeChunkComponentType<FindTarget>(true);
 
 
+#chunk buffer access
+
+        using Game.Components;
+        using Unity.Burst;
+        using Unity.Entities;
+        using Unity.Jobs;
+        using Unity.Transforms;
+
+        namespace Game.Systems.Tests
+        {
+            public class TargetChunkSystem : JobComponentSystem
+            {
+
+                private ComponentGroup _g;
+                protected override void OnCreateManager()
+                {
+                    // query
+                    _g = GetComponentGroup( new EntityArchetypeQuery() 
+                    {
+                        All = new ComponentType[] { ComponentType.Create<TargetBuffer>(), ComponentType.ReadOnly<Search>(), ComponentType.ReadOnly<Position>(), ComponentType.ReadOnly<Rotation>(), ComponentType.ReadOnly<Faction>(),  },
+                        None =  new ComponentType[] { ComponentType.ReadOnly<Target>(), ComponentType.ReadOnly<Dead>() }, 
+                        //Any = Array.Empty<ComponentType>(),
+                    } );
+                }
+
+                // Schedule Job
+                protected override JobHandle OnUpdate(JobHandle deps) => new Job()
+                {
+                    TargetBufferChunkType = GetArchetypeChunkBufferType<TargetBuffer>() // -RW buffer
+
+                }.Schedule(_g, deps);
+
+
+                [BurstCompile]
+                private struct Job : IJobChunk
+                {
+                    public ArchetypeChunkBufferType<TargetBuffer> TargetBufferChunkType;
+
+                    public void Execute(ArchetypeChunk chunk, int chunkIndex, int firstEntityIndex)
+                    {
+                        var buffers = chunk.GetBufferAccessor(TargetBufferChunkType); //get buffers from chunk
+
+                        for( int i = 0; i < buffers.Length; i++ )
+                        {
+                            var buffer = buffers[i];
+
+                            buffer[0] = new TargetBuffer(); //write
+                        }
+                    }
+                }
+            }
+        }
+
+
+
 # jobhandle in an array
       var handleArray = new NativeArray<JobHandle>(100, Allocator.Persistent);
  
