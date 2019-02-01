@@ -8,6 +8,8 @@ var fwd = math.forward(rotations[i].Value);
 structs values cant be assigned, whole new struct must be replaced - struct = new struct{ value = 21 };
 
 
+
+
 # ecs specific
 queries
         private ComponentGroup group;
@@ -33,6 +35,96 @@ queries
             
             NativeArray<ArchetypeChunk> chunks = group.CreateArchetypeChunkArray(Allocator.TempJob);
             var ecsTestData = GetArchetypeChunkComponentType<FindTarget>(true);
+
+#ijob chunk iteration
+
+        using Game.Components;
+        using Unity.Burst;
+        using Unity.Collections;
+        using Unity.Entities;
+        using Unity.Jobs;
+        using Unity.Transforms;
+        using UnityEngine;
+
+        namespace Game.Systems.Tests
+        {
+            public class TargetChunkSystem : JobComponentSystem
+            {
+
+                private ComponentGroup _g;
+                private ArchetypeChunkComponentType<Rotation> rotationType;
+                private ArchetypeChunkComponentType<Position> positionType;
+
+                protected override void OnCreateManager()
+                {
+                    // query
+                    _g = GetComponentGroup( new EntityArchetypeQuery
+                    {
+                        All = new ComponentType[] { ComponentType.Create<TargetBuffer>(), ComponentType.ReadOnly<Search>(), ComponentType.Create<Position>(), ComponentType.ReadOnly<Rotation>(), ComponentType.ReadOnly<Faction>(),  },
+                        None =  new ComponentType[] { ComponentType.ReadOnly<Target>(), ComponentType.ReadOnly<Dead>() }, 
+                        //Any = Array.Empty<ComponentType>(),
+                    } );
+                }
+
+                //[BurstCompile]
+                private struct Job : IJobChunk
+                {
+                    public ArchetypeChunkComponentType<Position> PositionType;
+                    public ArchetypeChunkComponentType<Rotation> RotationType;
+                    public ArchetypeChunkComponentType<Faction> FactionType;
+                    public ArchetypeChunkBufferType<TargetBuffer> TargetBufferChunkType;
+
+                    public void Execute(ArchetypeChunk chunk, int chunkIndex, int firstEntityIndex)
+                    {
+                        //var instanceCount = chunk.Count;
+                        var chunkPositions = chunk.GetNativeArray(PositionType);
+                        var chunkRotations = chunk.GetNativeArray(RotationType);
+                        var chunkFactions = chunk.GetNativeArray(FactionType);
+                        var buffers = chunk.GetBufferAccessor(TargetBufferChunkType); //get buffers from chunk
+
+                        for( int i = 0; i < chunk.Count; i++ )
+                        {
+                            chunkFactions[i] = new Faction
+                            {
+                                Value = Faction.FactionType.Friendly
+                            };
+                            chunkPositions[i] = new Position{ Value = Vector3.up};
+                            //var buffer = buffers[i];
+                            var targetbuf = new TargetBuffer
+                            {
+                                Value = new Target
+                                {
+                                    Entity = Entity.Null,
+                                    Position = Vector3.up,
+                                    Health = 3
+                                }
+                            };
+                            buffers[i].Add(targetbuf);
+                        }
+                        //chunk.
+                    }
+                }
+
+                protected override JobHandle OnUpdate(JobHandle deps)
+                {
+                    //var chunks = _g.CreateArchetypeChunkArray(Allocator.TempJob);
+
+                    var job = new Job
+                    {
+                        PositionType = GetArchetypeChunkComponentType<Position>(),
+                        RotationType = GetArchetypeChunkComponentType<Rotation>(),
+                        FactionType = GetArchetypeChunkComponentType<Faction>(),
+                        TargetBufferChunkType = GetArchetypeChunkBufferType<TargetBuffer>()
+                    };
+                    var handle = job.Schedule(_g, deps);
+
+
+                    return handle;
+                }
+
+
+            }
+        }
 
 
 #chunk buffer access
