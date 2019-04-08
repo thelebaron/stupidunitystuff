@@ -18,7 +18,13 @@ Says to apply your rotation to real-world right, to get my right. Rotations are 
 
 Using matrixes (quaternions replace them,) the worldToLocal matrix upper-left 3x3 (no translation data) seems to work.
 
-
+# constructing float4x4
+        localToParent = new LocalToParent
+        {
+            Value = float4x4.TRS(new float3(body.m_SmoothPosition/* + cam.PositionOffset*/),
+                quaternion.LookRotationSafe(math.forward(rotation.Value), math.up()),
+                new float3(1.0f, 1.0f, 1.0f))
+        };
 
 # ecs specific
 queries
