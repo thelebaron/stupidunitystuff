@@ -8,6 +8,16 @@ var fwd = math.forward(rotations[i].Value);
 structs values cant be assigned, whole new struct must be replaced - struct = new struct{ value = 21 };
 
 
+# math for TransformDirection
+https://answers.unity.com/questions/356638/maths-behind-transformtransformdirection.html
+Take `Vector3 B = transform.TransformDirection(Vector3.right);` as an example.
+
+Says to apply your rotation to real-world right, to get my right. Rotations are quaternions, which apply using `*`, so the statement is really:
+
+     Vector3 B = transform.rotation * Vector3.right;
+
+Using matrixes (quaternions replace them,) the worldToLocal matrix upper-left 3x3 (no translation data) seems to work.
+
 
 
 # ecs specific
