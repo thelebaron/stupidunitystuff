@@ -25,6 +25,9 @@ Using matrixes (quaternions replace them,) the worldToLocal matrix upper-left 3x
                 quaternion.LookRotationSafe(math.forward(rotation.Value), math.up()),
                 new float3(1.0f, 1.0f, 1.0f))
         };
+# magnitude
+You can use math.length\lengthsq, or write your own extension with naming magnitude\sqrmagnitude it's very simple
+https://forum.unity.com/threads/unity-mathematics-available-on-github.526100/page-4#post-3996142
 
 # ecs specific
 queries
