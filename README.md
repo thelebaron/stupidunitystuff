@@ -7,6 +7,12 @@ var fwd = math.forward(rotations[i].Value);
 
 structs values cant be assigned, whole new struct must be replaced - struct = new struct{ value = 21 };
 
+# math for InverseTransformDirection
+quaternion rotation = math.inverse(math.quaternion(localToWorld.Value));
+float3 localVelocity = math.mul(rotation,velocity.Linear * 0.016f) * timeScale; 
+  finally worked for me to be the equiv of 
+             
+Vector3 localVelocity = transform.InverseTransformDirection(m_FPController.Velocity * 0.016f) * Time.timeScale;
 
 # math for TransformDirection
 https://answers.unity.com/questions/356638/maths-behind-transformtransformdirection.html
