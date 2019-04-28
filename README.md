@@ -1,12 +1,20 @@
 # remedialnotes
 embarassing notes
 
+
 transform.forward - to get forward from quaternion, multiply quaternion by whatever vector "forward" is in your coordinate system - most likely (0,0,1) 
 
 var fwd = math.forward(rotations[i].Value);
 
 structs values cant be assigned, whole new struct must be replaced - struct = new struct{ value = 21 };
 
+# sin movement             
+            var amplitude = 1;
+            var frequency = 1;
+            var scale = c1.Value;
+            scale += amplitude*(math.sin(2*math.PI*frequency*time) - math.sin(2*Mathf.PI*frequency*(time - deltaTime)))*maths.up;
+            c1.Value.y = scale.y;
+            
 # math for InverseTransformDirection
 quaternion rotation = math.inverse(math.quaternion(localToWorld.Value));
 float3 localVelocity = math.mul(rotation,velocity.Linear * 0.016f) * timeScale; 
