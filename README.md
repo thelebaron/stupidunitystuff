@@ -31,7 +31,9 @@ Says to apply your rotation to real-world right, to get my right. Rotations are 
      Vector3 B = transform.rotation * Vector3.right;
 
 Using matrixes (quaternions replace them,) the worldToLocal matrix upper-left 3x3 (no translation data) seems to work.
-
+#quaternion Math to math
+var rot = quaternion.LookRotationSafe(rayHit.SurfaceNormal, maths.up);
+rot = Quaternion.FromToRotation(Vector3.up, rayHit.SurfaceNormal);
 # constructing float4x4
         localToParent = new LocalToParent
         {
