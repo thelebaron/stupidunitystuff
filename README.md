@@ -233,6 +233,13 @@ queries
 
 
 
+# keep scene view active
+if (Application.isEditor)
+{
+    m_fpinput.SetCursorLock(false);
+    UnityEditor.SceneView.FocusWindowIfItsOpen(typeof(UnityEditor.SceneView));
+}
+
 ------------------- python --------------------------
 https://www.pugetsystems.com/labs/hpc/The-Best-Way-to-Install-TensorFlow-with-GPU-Support-on-Windows-10-Without-Installing-CUDA-1187/#create-a-python-virtual-environment-for-tensorflow-using-conda
 
