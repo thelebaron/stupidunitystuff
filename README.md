@@ -16,14 +16,12 @@ structs values cant be assigned, whole new struct must be replaced - struct = ne
             c1.Value.y = scale.y;
             
 # math for TransformPoint
-old - 
-transform.TransformPoint(Bezier.GetFirstDerivative(points[0], points[1], points[2], t)) - transform.position;
-dots(untested) - 
-  float3 offsetPosition = new float3(3, 3, 3);
-        quaternion offsetRotation = quaternion.EulerYXZ(50, 25, 100);
-        RigidTransform transform = new RigidTransform(offsetRotation, offsetPosition);
-        float3 someLocalPosition = new float3(1, 1, 1);
-        float3 worldPosition = math.transform(transform, someLocalPosition);
+old - transform.TransformPoint(Bezier.GetFirstDerivative(points[0], points[1], points[2], t)) - transform.position;
+dots(untested) - float3 offsetPosition = new float3(3, 3, 3);
+            quaternion offsetRotation = quaternion.EulerYXZ(50, 25, 100);
+            RigidTransform transform = new RigidTransform(offsetRotation, offsetPosition);
+            float3 someLocalPosition = new float3(1, 1, 1);
+            float3 worldPosition = math.transform(transform, someLocalPosition);
 
 # math for InverseTransformDirection
 quaternion rotation = math.inverse(math.quaternion(localToWorld.Value));
