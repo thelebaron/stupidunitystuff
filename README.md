@@ -15,6 +15,16 @@ structs values cant be assigned, whole new struct must be replaced - struct = ne
             scale += amplitude*(math.sin(2*math.PI*frequency*time) - math.sin(2*Mathf.PI*frequency*(time - deltaTime)))*maths.up;
             c1.Value.y = scale.y;
             
+# math for TransformPoint
+old - 
+transform.TransformPoint(Bezier.GetFirstDerivative(points[0], points[1], points[2], t)) - transform.position;
+dots(untested) - 
+  float3 offsetPosition = new float3(3, 3, 3);
+        quaternion offsetRotation = quaternion.EulerYXZ(50, 25, 100);
+        RigidTransform transform = new RigidTransform(offsetRotation, offsetPosition);
+        float3 someLocalPosition = new float3(1, 1, 1);
+        float3 worldPosition = math.transform(transform, someLocalPosition);
+
 # math for InverseTransformDirection
 quaternion rotation = math.inverse(math.quaternion(localToWorld.Value));
 float3 localVelocity = math.mul(rotation,velocity.Linear * 0.016f) * timeScale; 
