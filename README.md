@@ -30,6 +30,11 @@ RigidTransform transform = new RigidTransform(offsetRotation, offsetPosition);
 float3 someLocalPosition = new float3(1, 1, 1);
 float3 worldPosition = math.transform(transform, someLocalPosition);
 ```
+or just
+```cs
+math.transform(LocalToWorld, myPoint);
+```
+
 
 # math for InverseTransformDirection
 quaternion rotation = math.inverse(math.quaternion(localToWorld.Value));
