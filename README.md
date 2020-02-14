@@ -9,14 +9,19 @@ var fwd = math.forward(rotations[i].Value);
 structs values cant be assigned, whole new struct must be replaced - struct = new struct{ value = 21 };
 
 # sin movement             
-            var amplitude = 1;
-            var frequency = 1;
-            var scale = c1.Value;
-            scale += amplitude*(math.sin(2*math.PI*frequency*time) - math.sin(2*Mathf.PI*frequency*(time - deltaTime)))*maths.up;
-            c1.Value.y = scale.y;
+```cs
+var amplitude = 1;
+var frequency = 1;
+var scale = c1.Value;
+scale += amplitude*(math.sin(2*math.PI*frequency*time) - math.sin(2*Mathf.PI*frequency*(time - deltaTime)))*maths.up;
+c1.Value.y = scale.y;
+```
             
 # math for TransformPoint
-old - `transform.TransformPoint(Bezier.GetFirstDerivative(points[0], points[1], points[2], t)) - transform.position;`
+old - 
+```cs
+transform.TransformPoint(Bezier.GetFirstDerivative(points[0], points[1], points[2], t)) - transform.position;
+```
 dots(untested) - 
 ```cs
 float3 offsetPosition = new float3(3, 3, 3);
