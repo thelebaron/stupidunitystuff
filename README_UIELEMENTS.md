@@ -2,6 +2,9 @@
 
 must have ```EventSystem(UI Toolkit)``` in scene to process input actions
 
+# query 
+```closeButton =  editorPanel.Q<Button>("inspector-close-button");```
+
 # show / hide
 ```
 visualElement.style.display = DisplayStyle.None;
