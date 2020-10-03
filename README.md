@@ -1,4 +1,4 @@
-# remedialnotes
+# stupid general mathy notes
 embarassing notes
 
 
