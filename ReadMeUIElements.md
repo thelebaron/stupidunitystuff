@@ -1,5 +1,6 @@
-# dumb ui elements notes
+# stupid ui elements notes
 
+must have ```EventSystem(UI Toolkit)``` in scene to process input actions
 
 # show / hide
 ```
