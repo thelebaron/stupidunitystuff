@@ -55,3 +55,56 @@ Debug.Log(reflectionData);
 // will log Translation, Rotation if iterating through all types
 
 ```
+
+
+working code dump
+
+```
+var entities   = em.GetAllEntities();
+var methodInfo = typeof(EntityManager).GetMethod("GetComponentData");
+for (var i = 0; i < 15/*entities.Length*/; i++)
+{
+    var e     = entities[i];
+    var types = em.GetComponentTypes(e);
+    for (var j = 0; j != types.Length; j++)
+    {
+        var t = types[j].GetManagedType();
+        // Ignore tag component for now
+        if (TypeManager.GetTypeInfo(types[j].TypeIndex).IsZeroSized)
+            continue;
+        // Ignore buffer component for now
+        if (typeof(IBufferElementData).IsAssignableFrom(t))
+            continue;
+        // Ignore shared component for now
+        if (typeof(ISharedComponentData).IsAssignableFrom(t))
+            continue;
+
+        if (typeof(IComponentData).IsAssignableFrom(t))
+        {
+            //Debug.Log(t + " is icd");
+            var genericMethodInfo = methodInfo?.MakeGenericMethod(t);
+            var parameters        = new object[] {e};
+            //Debug.Log(t.Name + JsonUtility.ToJson(genericMethodInfo?.Invoke(em, parameters)));
+
+            var reflectedComponentData = genericMethodInfo?.Invoke(em, parameters);
+            var cast                  = Cast(t, reflectedComponentData);
+
+            Debug.Log("is same stuff? " + cast.Equals(reflectedComponentData));
+
+            foreach (var field in t.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
+            {
+                Debug.Log(type.Name + field.Name + field.GetValue(reflectedComponentData)); // last part doesnt work
+            }
+            //Debug.Log(cast);
+
+            var obj = Activator.CreateInstance(t); // what does this actually do?
+
+        }
+
+    }
+
+    types.Dispose();
+}
+
+entities.Dispose();
+```
