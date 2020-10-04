@@ -1,5 +1,28 @@
 
 # REFLECTION 
+
+get type
+```
+Type.GetType("string name")
+```
+
+iterate via reflection
+```
+var componentTypes = em.GetComponentTypes(entity);
+foreach (var componentType in componentTypes)
+{
+    var type        = componentType.GetManagedType();
+    //var generic = type.GetGenericTypeDefinition();
+    // attempt to get all fields inside struct and name them - not working
+    foreach (var fieldInfo in type.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
+    {
+        Debug.Log(type.Name + fieldInfo.Name/* + fieldInfo.GetValue(componentType)*/); // last part doesnt work
+    }
+}
+
+```
+
+
 test
 ```
 // do stuff, make entity, give it data
