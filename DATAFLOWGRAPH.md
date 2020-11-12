@@ -13,7 +13,7 @@ options:
   Islands - Connected components in the graph will be executed in one job.  
 
 
-* Systems interaction
+## Systems interaction
 
 Must register/deregister any system with ProcessDefaultAnimationGraph
 ```
@@ -36,4 +36,12 @@ base.OnDestroy();
 
 ```
 
-Questions:
+## Questions
+* Will ProcessDefaultAnimationGraph be included in the final release? Why is it not a part of the animation package
+* How to add/remove rootmotion
+* How to transition by time/bool
+* Are the nodes in the samples expected to be included in the official packages?
+* Is creating DFG nodes considered to be expected/commonplace? Is DFG an internal tool to facillitate or intended for users to base game logic on
+* Will DFG have a visual representation?
+* Why are animation systems mainthreaded for graph interactions?
+
