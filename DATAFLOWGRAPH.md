@@ -2,7 +2,7 @@
 # dataflowgraph + animation
 learning notes - might be incorrect
 
-change graph threading
+## change graph threading
 ```
 nodeSet.RendererModel = NodeSet.RenderExecutionModel.MaximallyParallel;
 ```
