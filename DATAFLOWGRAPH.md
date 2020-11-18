@@ -45,3 +45,5 @@ base.OnDestroy();
 * Will DFG have a visual representation?
 * Why are animation systems mainthreaded for graph interactions?
 * What are the differences between all the rootmotion configuration options? Is configuration all you need to set?
+* Animation events?
+* How to set a node to automatically overwrite component data? Or is there a receive message function?
