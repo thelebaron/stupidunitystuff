@@ -14,7 +14,7 @@ options:
 
 ## ClipConfiguration
 
-ClipConfigurationMask:
+ClipConfigurationMask:  
   NormalizedTime = 1, // make animation run at sensible rate  
   LoopTime = 2, // loop animation duration  
   LoopValues = 4, // loop animation(ie seamless loop)  
