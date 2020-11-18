@@ -12,6 +12,16 @@ options:
   Synchronous - All nodes are executed on the calling thread  
   Islands - Connected components in the graph will be executed in one job.  
 
+## ClipConfiguration
+
+ClipConfigurationMask:
+  NormalizedTime = 1, // make animation run at sensible rate
+  LoopTime = 2, // loop animation duration
+  LoopValues = 4, // loop animation(ie seamless loop)
+  CycleRootMotion = 8, //?
+  DeltaRootMotion = 16, // 
+  RootMotionFromVelocity = 32, // 
+  BankPivot = 64, // 
 
 ## Systems interaction
 
