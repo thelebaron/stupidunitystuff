@@ -44,4 +44,4 @@ base.OnDestroy();
 * Is creating DFG nodes considered to be expected/commonplace? Is DFG an internal tool to facillitate or intended for users to base game logic on
 * Will DFG have a visual representation?
 * Why are animation systems mainthreaded for graph interactions?
-*What are the differences between all the rootmotion configuration options? Is configuration all you need to set?
+* What are the differences between all the rootmotion configuration options? Is configuration all you need to set?
