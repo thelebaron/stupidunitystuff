@@ -3,8 +3,9 @@
 learning notes - might be incorrect
 
 # Hierarchy notes
+
+GameObject with structure of 
 ```
-// GameObject with structure of 
 CharacterRoot -- SkeletonRoot -- HipsJoint -- OtherJoints  
               -- CharacterMesh  
 // gets converted into
@@ -12,6 +13,10 @@ CharacterRoot -- SkeletonRoot -- HipsJoint -- OtherJoints
 CharacterRoot -- SkeletonRoot -- CharacterMesh  
               -- CharacterMesh  
 ```
+The "CharacterMesh" entity under the hips appears to be the main mesh? Contains
+while the "CharacterMesh" entity under the root isnt? 
+
+
 ## change graph threading
 ```
 nodeSet.RendererModel = NodeSet.RenderExecutionModel.MaximallyParallel;
