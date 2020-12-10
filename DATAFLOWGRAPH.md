@@ -3,14 +3,15 @@
 learning notes - might be incorrect
 
 # Hierarchy notes
-GameObject with structure of 
+```
+// GameObject with structure of 
 CharacterRoot -- SkeletonRoot -- HipsJoint -- OtherJoints  
               -- CharacterMesh  
-gets converted into
+// gets converted into
 CharacterRoot -- SkeletonRoot -- HipsJoint -- OtherJoints  
 CharacterRoot -- SkeletonRoot -- CharacterMesh  
               -- CharacterMesh  
-
+```
 ## change graph threading
 ```
 nodeSet.RendererModel = NodeSet.RenderExecutionModel.MaximallyParallel;
