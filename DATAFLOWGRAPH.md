@@ -16,6 +16,9 @@ CharacterRoot -- SkeletonRoot -- CharacterMesh
 The "CharacterMesh" entity under the hips appears to be the main mesh? Contains
 while the "CharacterMesh" entity under the root isnt? 
 
+This entity also has a SkinnedMeshToRigIndexMapping buffer. RigIndex index contains corresponding SkinMeshIndex(why isnt this 1:1 match given they are the same length?)
+SkinnedMeshRenderer.bones contains the rig index + name
+
 
 ## change graph threading
 ```
