@@ -71,57 +71,52 @@ base.OnDestroy();
 
 Old unused code snippet
 ```
-  [UpdateAfter(typeof(RotateSimpleController))]
-  [UpdateInGroup(typeof(DefaultAnimationSystemGroup))]
-  public class GraphMainThreadUpdaterSystem : SystemBase
-  {
-      private ProcessDefaultAnimationGraph m_GraphSystem;
+[UpdateAfter(typeof(RotateSimpleController))]
+[UpdateInGroup(typeof(DefaultAnimationSystemGroup))]
+public class GraphMainThreadUpdaterSystem : SystemBase
+{
+	private ProcessDefaultAnimationGraph m_GraphSystem;
 
-      protected override void OnCreate()
-      {
-          base.OnCreate();
-          m_GraphSystem = World.GetOrCreateSystem<ProcessDefaultAnimationGraph>();
-          m_GraphSystem.AddRef();
-      }
+	protected override void OnCreate()
+	{
+		base.OnCreate();
+		m_GraphSystem = World.GetOrCreateSystem<ProcessDefaultAnimationGraph>();
+		m_GraphSystem.AddRef();
+	}
 
-      protected override void OnDestroy()
-      {
-          base.OnDestroy();
-          m_GraphSystem.RemoveRef();
-      }
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+		m_GraphSystem.RemoveRef();
+	}
 
-      protected override void OnUpdate()
-      {
-          // Update graph if the animation component changed
-          Entities
-          //.WithChangeFilter<MyFirstClip_PlayClipComponent>()
-          .WithName("UpdateVelocityGraph")
-          .WithoutBurst()
-          .ForEach((Entity e, ref PhysicsVelocity velocity, in SimpleControllerData simpleControllerData, in LocalToWorld localToWorld) =>
-          {
-              var node = m_GraphSystem.Set.GetDefinition(simpleControllerData.PhysicsNodeHandle);
+	protected override void OnUpdate()
+	{
+		// Update graph if the animation component changed
+		Entities
+		//.WithChangeFilter<MyFirstClip_PlayClipComponent>()
+		.WithName("UpdateVelocityGraph")
+		.WithoutBurst()
+		.ForEach((Entity e, ref PhysicsVelocity velocity, in SimpleControllerData simpleControllerData, in LocalToWorld localToWorld) =>
+		{
+			var node = m_GraphSystem.Set.GetDefinition(simpleControllerData.PhysicsNodeHandle);
 
-              GraphValue<float3> nodeGV = m_GraphSystem.Set.CreateGraphValue(simpleControllerData.PhysicsNodeHandle, PhysicsVelocityNode.KernelPorts.OuputDelta);
-              //node.SimulationPorts.Output;
+			GraphValue<float3> nodeGV = m_GraphSystem.Set.CreateGraphValue(simpleControllerData.PhysicsNodeHandle, PhysicsVelocityNode.KernelPorts.OuputDelta);
+			//node.SimulationPorts.Output;
+			//Debug.Log(m_GraphSystem.Set.GetValueBlocking(nodeGV) * 30);
 
-              //Debug.Log(m_GraphSystem.Set.GetValueBlocking(nodeGV) * 30);
+			var linear = m_GraphSystem.Set.GetValueBlocking(nodeGV) * 30;
+			var result = math.mul(new quaternion(localToWorld.Value), linear);
 
-              var linear = m_GraphSystem.Set.GetValueBlocking(nodeGV) * 30;
-              var result = math.mul(new quaternion(localToWorld.Value), linear);
+			//node.Hello();
+			//Debug.Log(x);
+			velocity.Linear = result;
 
-              //node.Hello();
-              //Debug.Log(x);
-              velocity.Linear = result;
+			m_GraphSystem.Set.ReleaseGraphValue(nodeGV);
 
-
-              m_GraphSystem.Set.ReleaseGraphValue(nodeGV);
-
-          }).Run();
-
-
-
-      }
-  }
+		}).Run();
+	}
+}
 ```
 
 
