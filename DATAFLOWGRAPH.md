@@ -5,7 +5,7 @@ learning notes - might be incorrect
 # Hierarchy notes
 
 GameObject with structure of 
-```
+```csharp
 CharacterRoot -- SkeletonRoot -- HipsJoint -- OtherJoints  
               -- CharacterMesh  
 // gets converted into
@@ -21,7 +21,7 @@ SkinnedMeshRenderer.bones contains the rig index + name
 
 
 ## change graph threading
-```
+```csharp
 nodeSet.RendererModel = NodeSet.RenderExecutionModel.MaximallyParallel;
 ```
 options:    
@@ -33,7 +33,7 @@ options:
 ## ClipConfiguration
 
 ClipConfigurationMask:  
-```
+```csharp
   NormalizedTime = 1, // make animation run at sensible rate  
   LoopTime = 2, // loop animation duration  
   LoopValues = 4, // loop animation(ie seamless loop)  
@@ -47,7 +47,7 @@ MotionId: ?
 ## Systems interaction
 
 Must register/deregister any system with ProcessDefaultAnimationGraph
-```
+```csharp
 // In OnCreate
 // Increase the reference count on the graph system so it knows that we want to use it.
 m_GraphSystem = World.GetOrCreateSystem<ProcessDefaultAnimationGraph>();
@@ -70,7 +70,7 @@ base.OnDestroy();
 ## Get value from node
 
 Old unused code snippet
-```
+```csharp
 [UpdateAfter(typeof(RotateSimpleController))]
 [UpdateInGroup(typeof(DefaultAnimationSystemGroup))]
 public class GraphMainThreadUpdaterSystem : SystemBase
