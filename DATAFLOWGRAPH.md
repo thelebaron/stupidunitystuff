@@ -2,6 +2,9 @@
 # dataflowgraph + animation
 learning notes - might be incorrect
 
+# Port Forwarding vs Connecting
+A Port can be _connected_ to multiple other ports but a port may only be forwarded to _one_ other port. See _ToggleClipNode.cs_ for details of workaround; tldr make KernelPassThroughNode to use for workaround.
+
 # Hierarchy notes
 
 GameObject with structure of 
