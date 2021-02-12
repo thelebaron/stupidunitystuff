@@ -291,6 +291,9 @@ for (var i = 0; i < length; i++) {
 }
 ```
 
+# make internal package parts visible to other assembly
+https://forum.unity.com/posts/6822197/
+
 ------------------- python --------------------------
 https://www.pugetsystems.com/labs/hpc/The-Best-Way-to-Install-TensorFlow-with-GPU-Support-on-Windows-10-Without-Installing-CUDA-1187/#create-a-python-virtual-environment-for-tensorflow-using-conda
 
