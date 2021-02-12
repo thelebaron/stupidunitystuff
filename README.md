@@ -261,6 +261,36 @@ queries
                 UnityEditor.SceneView.FocusWindowIfItsOpen(typeof(UnityEditor.SceneView));
             }
 
+
+
+# iterate over a struct
+
+```
+struct Foo {
+  int left;
+  int right;
+  int up;
+  int down;
+}
+```
+```
+var foo = new Foo { left = -1, right = 1, up = -1, down = 1 };
+var f = (int*)&foo;
+ 
+var left = f[0];
+var right = f[1];
+var up = f[2];
+var down = f[3];
+ 
+Debug.Log($"{left} {right} {up} {down}");
+ 
+// this will break if you added other stuff to Foo or different sized stuff
+var length = UnsafeUtility.SizeOf<Foo>() / UnsafeUtility.SizeOf<int>();
+for (var i = 0; i < length; i++) {
+    Debug.Log($"{f[i]}");
+}
+```
+
 ------------------- python --------------------------
 https://www.pugetsystems.com/labs/hpc/The-Best-Way-to-Install-TensorFlow-with-GPU-Support-on-Windows-10-Without-Installing-CUDA-1187/#create-a-python-virtual-environment-for-tensorflow-using-conda
 
