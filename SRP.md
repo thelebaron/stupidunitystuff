@@ -14,3 +14,7 @@ notes
 #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
 #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
 ```
+
+unknown replacements
+//#include "UnityLightingCommon.cginc"
+//#include "AutoLight.cginc"
