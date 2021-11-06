@@ -1,6 +1,6 @@
 # stupid scriptable render pipeline/unity shader stuff
 dumb notes
-UnityObjectToClipPos> hlsl todo
+UnityObjectToClipPos > TransformWorldToHClip(v.vertex)
 
 notes
 
