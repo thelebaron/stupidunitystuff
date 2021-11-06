@@ -1,6 +1,6 @@
 # stupid scriptable render pipeline/unity shader stuff
-embarassing notes
-
+dumb notes
+UnityObjectToClipPos> hlsl todo
 
 notes
 
