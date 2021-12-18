@@ -37,11 +37,19 @@ math.transform(LocalToWorld, myPoint);
 
 
 # math for InverseTransformDirection
-quaternion rotation = math.inverse(math.quaternion(localToWorld.Value));
-float3 localVelocity = math.mul(rotation,velocity.Linear * 0.016f) * timeScale; 
-  finally worked for me to be the equiv of 
-             
+          
+finally worked for me to be the equiv of  
+```cs
+// old
 Vector3 localVelocity = transform.InverseTransformDirection(m_FPController.Velocity * 0.016f) * Time.timeScale;
+```
+```cs
+// new
+quaternion rotation = math.inverse(math.quaternion(localToWorld.Value));
+float3 localVelocity = math.mul(rotation,velocity.Linear * 0.016f) * timeScale;
+
+```
+  
 
 # math for TransformDirection
 https://answers.unity.com/questions/356638/maths-behind-transformtransformdirection.html
